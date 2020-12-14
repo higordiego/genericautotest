@@ -23,7 +23,7 @@ const describeDelete = value => app =>
 	})
 
 
-exports.IntegrationRoutes = (app) => (json) => {
+exports.IntegrationRoutes = (app, json) => {
 	
 	beforeEach((done) => {
 		json.object.beforeEach.fn(done)
