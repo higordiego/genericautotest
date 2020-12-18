@@ -1,5 +1,5 @@
 
-const { IntegrationRoutes } = require('src/http')
+const { IntegrationRoutes } = require('./src/http')
 
 
 module.exports = ({
