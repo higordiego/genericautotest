@@ -1,8 +1,22 @@
-var request = require('supertest')
+const request = require('supertest')
 
-const expectToResponse = (done, status, be) => (_, res) => {
-  expect(res.statusCode).toBe(status)
-  expect(typeof res.body).toBe(be)
+const beEqual = ({ status, equalStatus, equalBody, equalData }) => {
+  expect(status).toBe(equalStatus)
+  expect(equalBody).toBe(equalData)
+}
+
+
+const factoryExpect = ({ equalData, equalBody, equalStatus, status, type }) => {
+  switch (type.toLowerCase()) {
+
+    case 'be':
+    default:
+      return beEqual({ status, equalStatus, equalData, equalBody })
+  }
+}
+
+const expectToResponse = (done, status, data, type = 'be') => (_, res) => {
+  factoryExpect({ equalData: data, equalBody: res.body, equalStatus: status, status: res.statusCode, type })
   done()
 }
 
